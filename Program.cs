@@ -18,6 +18,18 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());  // Add
 builder.Services.Configure<DbSettings>(builder.Configuration.GetSection("DbSettings")); // Add this line
 builder.Services.AddSingleton<TodoDbContext>(); // Add this line
 
+/* -------------------------------------------------------------------------- */
+/*                            Error Handling: START                           */
+/* -------------------------------------------------------------------------- */
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>(); // Add this line
+
+builder.Services.AddProblemDetails();  // Add this line
+
+// Adding of login 
+builder.Services.AddLogging();  //  Add this line
+/* -------------------------------------------------------------------------- */
+/*                             Error Handling: END                            */
+/* -------------------------------------------------------------------------- */
 
 var app = builder.Build();
 
