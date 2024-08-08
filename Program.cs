@@ -11,6 +11,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Automapping (DTO -> Model)
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());  // Add this line
+
 // User defined DI
 builder.Services.Configure<DbSettings>(builder.Configuration.GetSection("DbSettings")); // Add this line
 builder.Services.AddSingleton<TodoDbContext>(); // Add this line
