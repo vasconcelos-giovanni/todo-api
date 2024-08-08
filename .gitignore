@@ -1,0 +1,78 @@
+# .NET Core
+bin/
+obj/
+project.lock.json
+project.fragment.lock.json
+*.csproj.user
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# ASP.NET Core
+wwwroot/
+appsettings*.json
+appsettings*.xml
+*.db
+*.pdb
+*.log
+
+# User-specific files
+*.swp
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.log
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# Other
+*.dll
+*.exe
+*.exe.config
+*.nupkg
+*.snupkg
+*.cache
+*.config
+*.vscode/
+*.ncrunch*
+*.rptproj*
+*.rsuser
+*.suo
+*.sln.docstates
+*.sql
+*.dbmdl
+
+# Ignore Rider-specific files
+.idea/
+
+# Ignore JetBrains Rider configuration files
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignore DotCover files
+*.dotCover
+
+# Ignore backups
+*.bak
+*.tmp
+*.swp
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore local environment files
+.env
+
+# Ignore NuGet packages directory
+.nuget/
+
+# Ignore JetBrains Rider IDE settings
+.idea/
