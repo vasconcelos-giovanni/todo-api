@@ -22,7 +22,7 @@ namespace TodoAPI.AppDataContext
         // Configuring the database provider and connection string
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(_dbsettings.ConnectionString);
+            optionsBuilder.UseMySQL(_dbsettings.ConnectionString);
         }
 
         // Configuring the model for the Todo entity
