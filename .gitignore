@@ -76,3 +76,5 @@ Thumbs.db
 
 # Ignore JetBrains Rider IDE settings
 .idea/
+
+.fake
