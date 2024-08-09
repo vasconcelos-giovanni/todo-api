@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using TodoAPI.AppDataContext;
 using TodoAPI.Contracts;
 using TodoAPI.Interface;
@@ -30,9 +31,20 @@ namespace TodoAPI.Services
         /* -------------------------------------------------------------------------- */
         /*                                   Methods                                  */
         /* -------------------------------------------------------------------------- */
-        public Task CreateTodoAsync(CreateTodoRequest request)
+        public async Task CreateTodoAsync(CreateTodoRequest request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var todo = _mapper.Map<Todo>(request);
+                todo.CreatedAt = DateTime.Now;
+                _context.Todos.Add(todo);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while creating the Todo item.");
+                throw new Exception("An error occurred while creating the Todo item.");
+            }
         }
 
         public Task DeleteTodoAsync(Guid id)
@@ -40,9 +52,15 @@ namespace TodoAPI.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Todo>> GetAllAsync()
+        public async Task<IEnumerable<Todo>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var todo = await _context.Todos.ToListAsync();
+            if (todo == null)
+            {
+                throw new Exception('No Todo items found.');
+            }
+            
+            return todo;
         }
 
         public Task<Todo> GetByIdAsync(Guid id)
