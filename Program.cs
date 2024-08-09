@@ -1,6 +1,7 @@
 
 // program.cs
 using TodoAPI.AppDataContext;
+using TodoAPI.Middleware;
 using TodoAPI.Models;
 
 var builder = WebApplication.CreateBuilder(args);
