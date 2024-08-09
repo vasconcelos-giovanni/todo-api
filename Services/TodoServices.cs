@@ -57,7 +57,7 @@ namespace TodoAPI.Services
             var todo = await _context.Todos.ToListAsync();
             if (todo == null)
             {
-                throw new Exception('No Todo items found.');
+                throw new Exception("No Todo items found.");
             }
             
             return todo;
