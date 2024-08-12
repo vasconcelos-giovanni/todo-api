@@ -1,8 +1,10 @@
 
 // program.cs
 using TodoAPI.AppDataContext;
+using TodoAPI.Interface;
 using TodoAPI.Middleware;
 using TodoAPI.Models;
+using TodoAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +22,7 @@ builder.Services.Configure<DbSettings>(builder.Configuration.GetSection("DbSetti
 builder.Services.AddSingleton<TodoDbContext>(); // Add this line
 
 /* -------------------------------------------------------------------------- */
-/*                            Error Handling: START                           */
+/*                               Error Handling                               */
 /* -------------------------------------------------------------------------- */
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>(); // Add this line
 
@@ -29,7 +31,11 @@ builder.Services.AddProblemDetails();  // Add this line
 // Adding of login 
 builder.Services.AddLogging();  //  Add this line
 /* -------------------------------------------------------------------------- */
-/*                             Error Handling: END                            */
+
+/* -------------------------------------------------------------------------- */
+/*                                  Services                                  */
+/* -------------------------------------------------------------------------- */
+builder.Services.AddScoped<ITodoServices, TodoServices>();
 /* -------------------------------------------------------------------------- */
 
 var app = builder.Build();
