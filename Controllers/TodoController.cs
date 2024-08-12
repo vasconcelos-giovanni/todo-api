@@ -37,8 +37,6 @@ namespace TodoAPI.Controllers
                     return Ok(new { message = "No Todo Items  found" });
                 }
 
-                string test = "TEST";
-
                 return Ok(new { message = "Successfully retrieved all todos.", data = todo });
             }
             catch (Exception ex)
@@ -57,12 +55,12 @@ namespace TodoAPI.Controllers
                 var todo = await _todoServices.GetByIdAsync(id);
                 if (todo == null)
                 {
-                    return NotFound(new {message = $"No todo with ID \"{id}\" found."});
+                    return NotFound(new { message = $"No todo with ID \"{id}\" found." });
                 }
 
                 return Ok(new {
-                    message = $"Successfully retrieved Todo item with Id {id}.",
-                    data = todo 
+                    message = $"Successfully retrieved todo with 'ID' {id}.",
+                    data = todo
                 });
             }
             catch (Exception ex)
@@ -113,15 +111,16 @@ namespace TodoAPI.Controllers
                 }
 
                 await _todoServices.UpdateTodoAsync(id, request);
-                return Ok(new { message = $"Todo with ID \"{id}\" successfully updated" });
+                return Ok(new { message = $"Todo with ID \"{id}\" successfully updated." });
             }
-            catch (System.Exception)
+            catch (Exception ex)
             {
                 return StatusCode(
                     500,
-                    $"An error occurred while updating todo with ID \"{id}\".",
-                    error = ex.Message
-                );
+                    new {
+                        message = $"An error occurred while updating todo with ID \"{id}\".",
+                        error = ex.Message
+                });
             }
         }
 
@@ -136,7 +135,7 @@ namespace TodoAPI.Controllers
                 await _todoServices.DeleteTodoAsync(id);
                 return Ok(new { message = "Todo with ID \"{id}\" successfully deleted." });
             }
-            catch (System.Exception)
+            catch (Exception ex)
             {
                 return StatusCode(
                     500,

@@ -81,7 +81,7 @@ namespace TodoAPI.Services
             return todo;
         }
 
-        public Task<Todo> GetByIdAsync(Guid id)
+        public async Task<Todo> GetByIdAsync(Guid id)
         {
             var todo = await _context.Todos.FindAsync(id);
             if (todo == null)
@@ -102,7 +102,7 @@ namespace TodoAPI.Services
             try
             {
                 var todo = await _context.Todos.FindAsync(id);
-                if (todo = null)
+                if (todo == null)
                 {
                     throw new Exception($"Todo with ID \"{id}\" not found.");
                 }
