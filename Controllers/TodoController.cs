@@ -43,7 +43,34 @@ namespace TodoAPI.Controllers
             }
             catch (Exception ex)
             {                
-                return StatusCode(500, new { message = "An error occurred while retrieving all todos.", error = ex.Message });
+                return StatusCode(500, new {
+                    message = "An error occurred while retrieving all todos.",error = ex.Message
+                });
+            }
+        }
+
+        [HttpGet("{id:guid}")]
+        public async Task<IActionResult> GetByIdAsync(Guid id)
+        {
+            try
+            {
+                var todo = await _todoServices.GetByIdAsync(id);
+                if (todo == null)
+                {
+                    return NotFound(new {message = $"No todo with ID \"{id}\" found."});
+                }
+
+                return Ok(new {
+                    message = $"Successfully retrieved Todo item with Id {id}.",
+                    data = todo 
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new {
+                    message = $"An error occurred while retrieving the todo item with ID \"{id}\".",
+                    error = ex.Message
+                });
             }
         }
 
@@ -62,7 +89,10 @@ namespace TodoAPI.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = "An error occurred while creating the  crating Todo Item", error = ex.Message });
+                return StatusCode(500, new {
+                    message = "An error occurred while creating the  crating Todo Item",
+                    error = ex.Message
+                });
             }
         }
         /* -------------------------------------------------------------------------- */
