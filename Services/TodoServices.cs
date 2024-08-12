@@ -74,9 +74,57 @@ namespace TodoAPI.Services
             return todo;
         }
 
-        public Task UpdateTodoAsync(Guid id, UpdateTodoRequest request)
+        /* -------------------------------------------------------------------------- */
+        /* ---------------- How to make something as the `$fillable` ---------------- */
+        /* --------------------- property of the Laravel models? -------------------- */
+        /* -------------------------------------------------------------------------- */
+        public async Task UpdateTodoAsync(Guid id, UpdateTodoRequest request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var todo = await _context.Todos.FindAsync(id);
+                if (todo = null)
+                {
+                    throw new Exception($"Todo with ID \"{id}\" not found.");
+                }
+
+                if (request.Title != null)
+                {
+                    todo.Title = request.Title;
+                }
+
+                if (request.Description != null)
+                {
+                    todo.Description = request.Description;
+                }
+
+                if (request.IsComplete != null)
+                {
+                    todo.IsComplete = request.IsComplete.Value;
+                }
+
+                if (request.DueDate != null)
+                {
+                    todo.DueDate = request.DueDate.Value;
+                }
+
+                if (request.Priority != null)
+                {
+                    todo.Priority = request.Priority.Value;
+                }
+
+                todo.UpdatedAt = DateTime.Now;
+
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(
+                    ex,
+                    $"An error occurred while updating the todo with ID \"{id}\"."
+                    );
+                throw;
+            }
         }
         /* -------------------------------------------------------------------------- */
     }

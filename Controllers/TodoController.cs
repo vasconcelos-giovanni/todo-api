@@ -95,6 +95,35 @@ namespace TodoAPI.Controllers
                 });
             }
         }
+
+        [HttpPut("{id:guid}")]
+        public async Task<IActionResult> UpdateTodoAsync(Guid id, UpdateTodoRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var todo = await _todoServices.GetByIdAsync(id);
+                if (todo == null)
+                {
+                    return NotFound(new { message = $"Todo with ID \"{id}\" not found" });
+                }
+
+                await _todoServices.UpdateTodoAsync(id, request);
+                return Ok(new { message = $"Todo with ID \"{id}\" successfully updated" });
+            }
+            catch (System.Exception)
+            {
+                return StatusCode(
+                    500,
+                    $"An error occurred while updating todo with ID \"{id}\".",
+                    error = ex.Message
+                );
+            }
+        }
         /* -------------------------------------------------------------------------- */
     }
 }
