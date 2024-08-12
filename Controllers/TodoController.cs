@@ -124,6 +124,28 @@ namespace TodoAPI.Controllers
                 );
             }
         }
+
+        /* ------------------------------- QUESTION!!! ------------------------------ */
+        /* ------------- Why do I need `("{id:guid}")` in `[HttpDelete]` ------------ */
+         /* --------------------- if I have it in the parameters? -------------------- */
+        [HttpDelete("{id:guid}")]
+        public async Task<IActionResult> DeleteTodoAsync(Guid id)
+        {
+            try
+            {
+                await _todoServices.DeleteTodoAsync(id);
+                return Ok(new { message = "Todo with ID \"{id}\" successfully deleted." });
+            }
+            catch (System.Exception)
+            {
+                return StatusCode(
+                    500,
+                    new {
+                        message = $"An error occurred while deleting todo with ID \"{id}\"",
+                        error = ex.Message
+                });
+            }
+        }
         /* -------------------------------------------------------------------------- */
     }
 }

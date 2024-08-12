@@ -47,9 +47,27 @@ namespace TodoAPI.Services
             }
         }
 
-        public Task DeleteTodoAsync(Guid id)
+        /* -------------------------------------------------------------------------- */
+        /* ------------------------------- QUESTION!!! ------------------------------ */
+        /* ----- How to use "soft deletes" or some logging of the deleted value? ---- */
+        /* -------------------------------------------------------------------------- */
+        public async Task DeleteTodoAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var todo = await _context.Todos.FindAsync(id);
+            if (todo != null)
+            {
+                _context.Todos.Remove(todo);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                /* -------------------------------------------------------------------------- */
+                /* ------------------------------- QUESTION!!! ------------------------------ */
+                /* ---- Could I have an interface for exceptions and heirs for each model --- */
+                /* -- to avoid error messages repetitions and inconsistences between them? -- */
+                /* -------------------------------------------------------------------------- */
+                throw new Exception($"No todo with ID \"{id}\" found.");
+            }
         }
 
         public async Task<IEnumerable<Todo>> GetAllAsync()
@@ -75,6 +93,7 @@ namespace TodoAPI.Services
         }
 
         /* -------------------------------------------------------------------------- */
+        /* ------------------------------- QUESTION!!! ------------------------------ */
         /* ---------------- How to make something as the `$fillable` ---------------- */
         /* --------------------- property of the Laravel models? -------------------- */
         /* -------------------------------------------------------------------------- */
