@@ -1,6 +1,6 @@
 # TodoAPI
 
-## 📌 Project dea
+## 📌 Project Idea
 
 TodoAPI is a REST API with basic CRUD operations for a Todo app, which I've made following the tutorial: [How to Build CRUD Operations with .NET Core – A Todo API Handbook](freecodecamp.org/news/build-cr87836a7f-7f61-4ff5-895a-02a1dd5ca594ud-operations-with-dotnet-core-handbook/#step-11), by [Isaiah Cliford Opoku](https://www.freecodecamp.org/news/author/isaiahcliffordopoku/).
 
@@ -11,7 +11,7 @@ TodoAPI is a REST API with basic CRUD operations for a Todo app, which I've made
 ## 🔧 Technologies
 
 ![.Net](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white)
-
+ 
 - ASP.NET Core 8
 - Entity Framework
 
@@ -21,7 +21,7 @@ I have come from Laravel and this project was my first experience with ASP.NET C
 
 I have learned how to set up database context, to work with exception middleware and logging, contracts with DTOs (Data Transfer Objects), models with Entity Framework ORM, and to give meaningful HTTP responses.
 
-## Setting up local enviroment
+## 🏠 Setting up local enviroment
 
 Dependencies:
 - .NET ^8.0 SDK
@@ -50,7 +50,7 @@ Run the API.
 dotnet run
 ```
 
-## My learning questions
+## ❓ My learning questions
 
 > P.s.: These are personal questions for helping myself to improve.
 
